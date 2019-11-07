@@ -1,0 +1,26 @@
+﻿@page "/SearchByName"
+@using BlazingGreenBean.Models;
+@using BlazingGreenBean.Services;
+
+<h3>SearchByName</h3>
+<input type="text" placeholder="searCh by ReCiPe NamE" @bind="name" />
+<button @onclick="GetRecipes"></button>
+@{
+    foreach (var recipe in recipes)
+    {
+        <RecipeCard Recipe=recipe />
+    }
+}
+
+@code {
+    List<Recipe> recipes = new List<Recipe>();
+    string name = "";
+
+    GreenBeanAPIService GBAService = new GreenBeanAPIService();
+
+    private void GetRecipes()
+    {
+        recipes = GBAService.GetRecipesByName(name);
+        Console.WriteLine(name);
+    }
+}
