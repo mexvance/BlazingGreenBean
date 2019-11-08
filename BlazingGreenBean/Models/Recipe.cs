@@ -8,7 +8,7 @@ namespace BlazingGreenBean.Models
     public class Recipe
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Descr { get; set; }
         public string PercentMatch { get; set; }
     }
 }

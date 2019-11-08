@@ -4,7 +4,7 @@
 
 <h3>SearchByName</h3>
 <input type="text" placeholder="Search by Recipe Name" @bind-value="name" @bind-value:event="oninput"/>
-<button @onclick="GetRecipes">Search</button>
+<button @onclick="@(async () => await GetRecipes())">Search</button>
 @{
     foreach (var recipe in recipes)
     {
@@ -18,8 +18,8 @@
 
     GreenBeanAPIService GBAService = new GreenBeanAPIService();
 
-    private void GetRecipes()
+    private async Task GetRecipes()
     {
-        recipes = GBAService.GetRecipesByName(name);
+        recipes = await GBAService.GetRecipesByName(name);
     }
 }

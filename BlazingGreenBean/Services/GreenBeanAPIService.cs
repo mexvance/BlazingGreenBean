@@ -1,4 +1,5 @@
 ﻿using BlazingGreenBean.Models;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,11 @@ namespace BlazingGreenBean.Services
 {
     public class GreenBeanAPIService
     {
-        public List<Recipe> GetRecipesByName(string recipeName)
+        public async Task<List<Recipe>> GetRecipesByName(string recipeName)
         {
-            //call api
-            //convert to recipes
-            //return recipes
-            return new List<Recipe> { new Recipe { Name = recipeName }, new Recipe { Name = recipeName } };
+            var GBAPI = RestService.For<IGreenBeanAPI>("https://api.greenbeancooking.com");
+            var recipes = await GBAPI.GetRecipesByName(recipeName);
+            return recipes;
         }
     }
 }
