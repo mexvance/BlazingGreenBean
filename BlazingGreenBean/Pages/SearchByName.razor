@@ -3,8 +3,8 @@
 @using BlazingGreenBean.Services;
 
 <h3>SearchByName</h3>
-<input type="text" placeholder="searCh by ReCiPe NamE" @bind="name" />
-<button @onclick="GetRecipes"></button>
+<input type="text" placeholder="Search by Recipe Name" @bind-value="name" @bind-value:event="oninput"/>
+<button @onclick="GetRecipes">Search</button>
 @{
     foreach (var recipe in recipes)
     {
@@ -21,6 +21,5 @@
     private void GetRecipes()
     {
         recipes = GBAService.GetRecipesByName(name);
-        Console.WriteLine(name);
     }
 }

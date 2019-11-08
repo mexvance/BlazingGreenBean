@@ -13,7 +13,7 @@ namespace BlazingGreenBean.Services
             //call api
             //convert to recipes
             //return recipes
-            return new List<Recipe> { };
+            return new List<Recipe> { new Recipe { Name = recipeName }, new Recipe { Name = recipeName } };
         }
     }
 }
