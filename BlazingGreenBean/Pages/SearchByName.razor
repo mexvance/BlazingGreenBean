@@ -3,23 +3,27 @@
 @inject HttpClient Http
 
 <h3>Search By Name</h3>
-<input type="text" placeholder="Search by Recipe Name" @bind-value="name" @bind-value:event="oninput" />
-<button @onclick="@GetRecipes">Search</button>
+<EditForm Model="@validationWrapper" OnValidSubmit="@GetRecipes">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <input type="text" placeholder="Search by Recipe Name" @bind-value="@validationWrapper.Name" @bind-value:event="oninput" />
+    <button type="submit">Search</button>
+</EditForm>
 <div class="w3-row-padding">
-@{
-    foreach (var recipe in recipes)
-    {
-        <RecipeCard Recipe=recipe />
+    @{
+        foreach (var recipe in recipes)
+        {
+            <RecipeCard Recipe=recipe />
+        }
     }
-}
 </div>
 
 @code {
     Recipe[] recipes = new Recipe[0];
-    string name = "";
+    private ValidationWrapper validationWrapper = new ValidationWrapper();
 
     private async Task GetRecipes()
     {
-        recipes = await Http.GetJsonAsync<Recipe[]>("https://api.greenbeancooking.com/searchrecipebyname/" + name);
+        recipes = await Http.GetJsonAsync<Recipe[]>("https://api.greenbeancooking.com/searchrecipebyname/" + validationWrapper.Name);
     }
 }
