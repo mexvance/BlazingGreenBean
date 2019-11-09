@@ -1,0 +1,23 @@
+﻿@page "/GetAllRecipes"
+@using BlazingGreenBean.Models;
+@inject HttpClient Http
+
+<h3>Get All Recipes</h3>
+<div class="w3-row-padding">
+    @{
+        foreach (var recipe in recipes)
+        {
+            <RecipeCard Recipe=recipe />
+        }
+    }
+</div>
+
+@code {
+    Recipe[] recipes = new Recipe[0];
+    string name = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await Http.GetJsonAsync<Recipe[]>("https://api.greenbeancooking.com/getallrecipes");
+    }
+}
