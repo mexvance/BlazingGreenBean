@@ -2,7 +2,7 @@
 @using BlazingGreenBean.Models;
 @inject HttpClient Http
 
-<h3>SearchByName</h3>
+<h3>Search By Name</h3>
 <input type="text" placeholder="Search by Recipe Name" @bind-value="name" @bind-value:event="oninput" />
 <button @onclick="@GetRecipes">Search</button>
 <div class="w3-row-padding">
