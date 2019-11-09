@@ -1,28 +1,26 @@
 ﻿@page "/SearchByName"
 @using BlazingGreenBean.Models;
-@using BlazingGreenBean.Services;
 @using System.Linq;
 @inject HttpClient Http
 
 <h3>SearchByName</h3>
 <input type="text" placeholder="Search by Recipe Name" @bind-value="name" @bind-value:event="oninput" />
 <button @onclick="@GetRecipes">Search</button>
+<div class="w3-row-padding">
 @{
     foreach (var recipe in recipes)
     {
         <RecipeCard Recipe=recipe />
     }
 }
+</div>
 
 @code {
     Recipe[] recipes = new Recipe[0];
     string name = "";
 
-    GreenBeanAPIService GBAService = new GreenBeanAPIService();
-
     private async Task GetRecipes()
     {
-        //recipes = await GBAService.GetRecipesByName(name);
         recipes = await Http.GetJsonAsync<Recipe[]>("https://api.greenbeancooking.com/searchrecipebyname/" + name);
     }
 }
