@@ -13,6 +13,7 @@ namespace BlazingGreenBean.Services
         {
             var GBAPI = RestService.For<IGreenBeanAPI>("https://api.greenbeancooking.com");
             var recipes = await GBAPI.GetRecipesByName(recipeName);
+            recipes = new List<Recipe> { new Recipe { Name = recipeName } };
             return recipes;
         }
     }

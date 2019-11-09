@@ -1,10 +1,11 @@
 ﻿@using BlazingGreenBean.Models;
 
-<div>
-    <h1>@Recipe.Name</h1>
-    <h3>@Recipe.Descr</h3>
-    <h3>@Recipe.PercentMatch</h3>
-</div>
+    <div class="w3-card w3-third">
+        <img src=@Recipe.Picture alt="recipe picture" style={{"width": "100%"}}/>
+        <h2 class="w3-container">@Recipe.Name</h2>
+        <p class="w3-text-green w3-container">Percent Match @Recipe.PercentMatch</p>
+        <p class="w3-container">Description @Recipe.Descr</p>
+    </div>
 
 @code {
     [Parameter]
